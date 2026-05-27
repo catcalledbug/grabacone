@@ -174,7 +174,7 @@ function getListItem(i, flavorObjects) {
 
 // Only fetch + load images on Flavors page
 window.onload = function() {
-    if (window.location.pathname.includes("flavors.html")) {
+    if (window.location.pathname === "/flavors.html") {
         console.log("On flavors page, initializing.");
         getImageURLs();
     }
