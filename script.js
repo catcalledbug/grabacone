@@ -31,6 +31,7 @@ async function getImageURLs() {
             if (!response.ok) {
                 throw new Error("Fetch failed.");
             } else {
+                console.log("Fetch successful.");
                 return response.text();
             }
         })
@@ -52,6 +53,7 @@ async function getImageURLs() {
 
 // convert xml elements -> array 
 function createList(xml) {
+    console.log("Converting XML.");
     let elements = xml.getElementsByTagName("Contents");
     const imgObjs = Array.from(elements);
     createListOfFlavors(imgObjs);
@@ -60,6 +62,7 @@ function createList(xml) {
 
 // get the image key and add to img object before further formatting
 function createListOfFlavors(imgObjs) {
+    console.log("Creating flavor objects.");
     let flavors = [];
     for (let i = 0; i < imgObjs.length; i++) {
 
@@ -78,6 +81,7 @@ function createListOfFlavors(imgObjs) {
 // use underscores and some have multiple dashes that can be used as delimiters
 function parseFlavorNames(flavorsBefore) {
     let formattedFlavors = [];
+    console.log("Parsing flavor names.");
 
     for (let i = 0; i < flavorsBefore.length; i++) {
         if (flavorObjects[i].urlForm.includes("Seasonal")) {
@@ -104,6 +108,7 @@ function parseFlavorNames(flavorsBefore) {
 
 // sorts flavors into categories: All, Seasonal, and Vegan
 function sortFlavors(flavorObjects) {
+    console.log("Sorting flavors.");
     const veganIdentifiers = ["Soy", "Sherbet", "Ice"];
 
     allFlavors = flavorObjects;
@@ -125,9 +130,11 @@ function sortFlavors(flavorObjects) {
 // Create <li> elements and append <img> and <p> elements
 // with their corresponding src attributes and text onto them.
 function createImageItems(flavorObjects, flavorType) {
+    console.log("Creating image items.");
 
     // if we're on the home page, just get the imgs for the marquee
     if (window.location.pathname === "/flavors.html") {
+        console.log("On flavors page.");
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
                 allFlavorsList.appendChild(getListItem(i, flavorObjects));
@@ -142,6 +149,8 @@ function createImageItems(flavorObjects, flavorType) {
 
 // Adds flavor <li> element to its corresponding <ul> and is displayed.
 function getListItem(i, flavorObjects) {
+        console.log("Creating list items.");
+
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
 
@@ -163,6 +172,7 @@ function getListItem(i, flavorObjects) {
 
 // Only fetch + load images on Flavors page
 window.onload = function() {
+    console.log("On flavors page, initializing.");
     if (window.location.pathname === "/flavors.html") {
         getImageURLs();
     }
@@ -172,6 +182,7 @@ window.onload = function() {
 // Toggle which lists is being displayed: All Flavors, Seasonal, Vegan
 // + toggle styles on active list buttons
 function toggleLists(event) { 
+    
     // button's id (all, vegan, seasonal)
     let id = event.target.id; 
 
