@@ -1,10 +1,10 @@
 // Only fetch + load images on Flavors page
-window.onload = function() {
-    if (window.location.pathname === "/flavors.html") {
-        console.log("On flavors page, initializing.");
+// window.onload = function() {
+//     if (window.location.pathname === "/flavors.html") {
+        // console.log("On flavors page, initializing.");
         getImageURLs();
-    }
-};
+    // }
+// };
 
 // s3 bucket url to fetch from
 const s3URL = "https://updated-flavors-gac.s3.us-west-2.amazonaws.com/";
