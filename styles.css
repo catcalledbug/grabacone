@@ -17,7 +17,7 @@ html {
 
 :root {
     --primary: #3CAFA7;
-    --secondary: #47A4C3;
+    --secondary: #2B827E;
     --tertiary: #D780DB;
     --deco: #B26A18;
     --extra: #762929;
@@ -89,7 +89,7 @@ h1 {
     font-family: var(--heading-font);
     text-align: center;
     font-weight: 400;
-    color: var(--primary);
+    color: var(--secondary);
     margin: 0 auto;
     font-size: var(--heading-size);
     letter-spacing: 1px;
