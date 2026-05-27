@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Our Flavors</title>
+        <link rel="stylesheet" href="styles.css"> 
+        <link rel="shortcut icon" type="image/png" href="./favicon.ico"/>        
+        <meta name="theme-color" content="rgba(60, 175, 167, 1)"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.179.0.min.js"></script>
+        <script src="components.js" type="module"></script>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="app">
+            <sm-header class="sm-header"></sm-header>
+            <lg-header class="lg-header"></lg-header>
+                <main v-if="!show">
+                    <article class="headings flavors-page-lg">
+                        <div class="heading-wrapper">
+                            <h1>OUR FLAVORS</h1>
+                            <h2 class="subheading">Serving Super Premium</h2>
+                            <h2 class="subheading">Chocolate Shoppe Ice Cream</h2>
+                        </div>
+                        <img id="chocolate-shoppe-logo" src="/imgs/chocolateshoppe.jpg" width="266" alt="The Chocolate Shoppe logo: A cartoon cow eating an ice cream cone.">
+                    </article>
+                    <article class="flavors-wrapper">
+                        <div class="button-wrapper">
+                            <button id='all' class="flavor-button button-active">All Flavors</button>
+                            <button id='seasonal' class="flavor-button">Seasonal Flavors</button>
+                            <button id='vegan' class="flavor-button">Vegan Flavors</button>
+                        </div>
+                        <section>
+                            <ul id='all-list' class="image-list all active"></ul>                           
+                        </section>
+                        <section>
+                            <ul id='seasonal-list' class="image-list seasonal"></ul>
+                        </section>
+                        <section>
+                            <ul id='vegan-list' class="image-list vegan"></ul>
+                        </section>
+                    </article>
+                    <sm-footer class="sm-footer"></sm-footer>
+                    <lg-footer class="lg-footer"></lg-footer>
+            </main>
+        </div>
+        <script src="script.js" type="module" async defer></script>
+    </body>
+</html>

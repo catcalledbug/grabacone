@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Grab A Cone</title>
+        <link rel="stylesheet" href="styles.css"> 
+        <link rel="shortcut icon" type="image/png" href="./favicon.ico"/>        
+        <meta name="theme-color" content="rgba(60, 175, 167, 1)"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.179.0.min.js"></script>
+        <script src="components.js" type="module"></script>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js"></script>
+    </head>
+        <body>
+            <div id="app">
+                <sm-header class="sm-header"></sm-header>
+                <lg-header class="lg-header"></lg-header>
+                    <main v-if="!show">
+                        <article class="lg-grid">
+                            <img class="sm-img" src="/imgs/icecream-wide-min.png" alt="2 scoops of ice cream served in a Chocolate Shoppe bowl.">
+                            <img id="img1" class="lg-img" src="/imgs/pink-cone.png" alt="2 scoops of ice cream on a sugar cone with a pink background.">
+                            <section id="sect1" class="headings">
+                                <h1>SOMETHING <br> FOR EVERYONE</h1>
+                                <p class="body-text">
+                                    At Grab A Cone, we have a variety of flavors, Wisconsin soft serve, & sundaes.
+                                    We also rotate flavors depending on the season & offer gluten-free, dairy-free, and vegan ice creams.
+                                </p>
+                                <button class="our-flavors-btn">
+                                    <a class="anchor-link" href="./flavors.html">OUR FLAVORS</a>
+                                </button>
+                            </section>
+                              
+                            <img class="sm-img" src="/imgs/baked-goods.jpeg" alt="Various homemade breads displayed on wooden racks: Rhubarb, Apple, Banana Nut, Zucchini, Blueberry, and Banana Breads.">
+                            <section id="sect2" class="headings">
+                                <h1>MORE THAN <br> ICE CREAM</h1>
+                                <p class="body-text">
+                                    We also serve a selection of burgers, sandwiches, soups, old-time malts and shakes, housemade jams, jellies, and seasonal breads. Come visit us today!
+                                </p>
+                                <button class="our-flavors-btn">
+                                    <a class="anchor-link" href="#bottom">FIND US</a>
+                                </button>
+                            </section>
+                            <img id="img2" class="lg-img" src="/imgs/seasonal-breads.jpg" alt="Various homemade breads displayed on wooden racks: Rhubarb, Apple, Banana Nut, Zucchini, Blueberry, and Banana Breads.">
+
+                            <img class="sm-img" id="img3" src="/imgs/gac-banner-mobile.png" alt="The outside of Grab A Cone, a small white building with a neon ice cream sign, fenced patio with tables, and large sign that says Grab A Cone.">
+                            <img class="lg-img" id="img3" src="/imgs/cone.png" alt="A scoop of strawberry ice cream on a waffle cone with a yellow background.">
+                            <section id="sect3" class="headings">
+                                <a class="jump-anchor" id="jump-about"></a>
+                                <h1>ABOUT US</h1>
+                                <p class="body-text">
+                                    Grab A Cone is a family-owned and operated ice cream shop located in Montfort, Wisconsin. We've been serving
+                                    Chocolate Shoppe Ice Cream, a local favorite churned in Madison, Wisconsin for over 50 years.
+                                </p>
+                            </section>
+                        </article>
+                    
+                <sm-footer class="sm-footer"></sm-footer>
+                <lg-footer class="lg-footer"></lg-footer>
+                <a id="bottom"></a>
+            </main>
+        </div>
+        <script src="script.js" type="module" async defer></script>
+    </body>
+</html>
