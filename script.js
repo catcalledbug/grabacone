@@ -1,10 +1,10 @@
 // Only fetch + load images on Flavors page
-// window.onload = function() {
-//     if (window.location.pathname === "/flavors.html") {
-        // console.log("On flavors page, initializing.");
+window.onload = function() {
+    if (window.location.pathname.includes("/flavors")) {
+        console.log("On flavors page, initializing.");
         getImageURLs();
-    // }
-// };
+    }
+};
 
 // s3 bucket url to fetch from
 const s3URL = "https://updated-flavors-gac.s3.us-west-2.amazonaws.com/";
@@ -143,7 +143,7 @@ function createImageItems(flavorObjects, flavorType) {
     console.log("Creating image items.");
 
     // if we're on the home page, just get the imgs for the marquee
-    if (window.location.pathname === "/flavors.html") {
+    if (window.location.pathname.includes("/flavors")) {
         console.log("On flavors page.");
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
