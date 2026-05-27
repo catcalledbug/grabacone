@@ -1,10 +1,3 @@
-// Only fetch + load images on Flavors page
-window.onload = function() {
-    if (window.location.pathname.includes("/flavors")) {
-        console.log("On flavors page, initializing.");
-        getImageURLs();
-    }
-};
 
 // s3 bucket url to fetch from
 const s3URL = "https://updated-flavors-gac.s3.us-west-2.amazonaws.com/";
@@ -178,6 +171,15 @@ function getListItem(i, flavorObjects) {
         
         return listItem;
 }   
+
+// Only fetch + load images on Flavors page
+window.onload = function() {
+    if (window.location.pathname.includes("/flavors")) {
+        console.log("On flavors page, initializing.");
+        getImageURLs();
+    }
+};
+
 
 
 // Toggle which lists is being displayed: All Flavors, Seasonal, Vegan
