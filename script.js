@@ -25,6 +25,7 @@ function Img(urlForm, displayForm, flavType) {
 // fetch images from s3 bucket, send xml to be converted,
 // then add event listeners to buttons
 async function getImageURLs() {
+    console.log("Making request to S3.");
     const request = new Request(s3URL);
     fetch(request)
         .then((response) => {
@@ -36,6 +37,7 @@ async function getImageURLs() {
             }
         })
         .then((xmlString) => {
+            console.log("Parsing XML.")
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, "text/xml");
             createList(xmlDoc);
