@@ -129,9 +129,9 @@ function sortFlavors(flavorObjects) {
 // Create <li> elements and append <img> and <p> elements
 // with their corresponding src attributes and text onto them.
 function createImageItems(flavorObjects, flavorType) {
-
+    console.log("Iterating through image objects.", flavorObjects);
     // if we're on the home page, just get the imgs for the marquee
-    if (window.location.pathname.includes("/flavors")) {
+    if (window.location.pathname.includes("flavors")) {
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
                 allFlavorsList.appendChild(getListItem(i, flavorObjects));
@@ -146,7 +146,7 @@ function createImageItems(flavorObjects, flavorType) {
 
 // Adds flavor <li> element to its corresponding <ul> and is displayed.
 function getListItem(i, flavorObjects) {
-
+        console.log("Creating image elements.");
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
         loading.classList.add("hide");
@@ -168,7 +168,7 @@ function getListItem(i, flavorObjects) {
 
 // Only fetch + load images on Flavors page
 window.onload = function() {
-    if (window.location.pathname.includes("/flavors")) {
+    if (window.location.pathname.includes("flavors")) {
         getImageURLs();
     }
 };
