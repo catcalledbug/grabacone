@@ -17,7 +17,7 @@ let veganFlavorsList = document.querySelector('.image-list.vegan');
 let flavorObjects = [];
 
 // loading animation
-const loadingContainer = document.querySelector(".animation-container");
+const loading = document.querySelector(".loader");
 
 function Img(urlForm, displayForm, flavType) {
     this.urlForm = `${s3URL}${urlForm}`;
@@ -149,7 +149,7 @@ function getListItem(i, flavorObjects) {
 
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
-        loadingContainer.classList.add("hide");
+        loading.classList.add("hide");
 
         let imgElement = document.createElement("img");
         imgElement.setAttribute('src', flavorObjects[i].urlForm);

@@ -420,7 +420,7 @@ a:hover, a:visited, a:link, a:active, a {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .animation-container {
