@@ -163,6 +163,8 @@ function getListItem(i, flavorObjects) {
         listItem.appendChild(imgElement);
         listItem.appendChild(flavorCaption);
         
+        console.log("listItem: ", listItem);
+
         return listItem;
 }   
 
