@@ -35,7 +35,6 @@ async function getImageURLs() {
                 throw new Error("Fetch failed.");
             } else {
                 console.log("Fetch successful.");
-                loadingContainer.classList.add("hide");
                 return response.text();
             }
         })
@@ -150,6 +149,7 @@ function getListItem(i, flavorObjects) {
 
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
+        loadingContainer.classList.add("hide");
 
         let imgElement = document.createElement("img");
         imgElement.setAttribute('src', flavorObjects[i].urlForm);
