@@ -16,6 +16,9 @@ let veganFlavorsList = document.querySelector('.image-list.vegan');
 // initial collection of unformatted data
 let flavorObjects = [];
 
+// loading animation
+const loadingContainer = document.querySelector(".animation-container");
+
 function Img(urlForm, displayForm, flavType) {
     this.urlForm = `${s3URL}${urlForm}`;
     this.displayForm = displayForm;
@@ -25,7 +28,6 @@ function Img(urlForm, displayForm, flavType) {
 // fetch images from s3 bucket, send xml to be converted,
 // then add event listeners to buttons
 async function getImageURLs() {
-    console.log("Making request to S3.");
     const request = new Request(s3URL);
     fetch(request)
         .then((response) => {
@@ -33,17 +35,16 @@ async function getImageURLs() {
                 throw new Error("Fetch failed.");
             } else {
                 console.log("Fetch successful.");
+                loadingContainer.classList.add("hide");
                 return response.text();
             }
         })
         .then((xmlString) => {
-            console.log("Parsing XML.")
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, "text/xml");
             createList(xmlDoc);
         })
         .then(() => {
-            console.log("Creating buttons for sorted lists.");
             const flavorBtns = document.querySelectorAll(".flavor-button");
             for (const btn of flavorBtns) {
                 btn.addEventListener("click", (event) => {
@@ -56,7 +57,6 @@ async function getImageURLs() {
 
 // convert xml elements -> array 
 function createList(xml) {
-    console.log("Converting XML.");
     let elements = xml.getElementsByTagName("Contents");
     const imgObjs = Array.from(elements);
     createListOfFlavors(imgObjs);
@@ -65,7 +65,6 @@ function createList(xml) {
 
 // get the image key and add to img object before further formatting
 function createListOfFlavors(imgObjs) {
-    console.log("Creating flavor objects.");
     let flavors = [];
     for (let i = 0; i < imgObjs.length; i++) {
 
@@ -84,7 +83,6 @@ function createListOfFlavors(imgObjs) {
 // use underscores and some have multiple dashes that can be used as delimiters
 function parseFlavorNames(flavorsBefore) {
     let formattedFlavors = [];
-    console.log("Parsing flavor names.");
 
     for (let i = 0; i < flavorsBefore.length; i++) {
         if (flavorObjects[i].urlForm.includes("Seasonal")) {
@@ -111,7 +109,6 @@ function parseFlavorNames(flavorsBefore) {
 
 // sorts flavors into categories: All, Seasonal, and Vegan
 function sortFlavors(flavorObjects) {
-    console.log("Sorting flavors.");
     const veganIdentifiers = ["Soy", "Sherbet", "Ice"];
 
     allFlavors = flavorObjects;
@@ -133,11 +130,9 @@ function sortFlavors(flavorObjects) {
 // Create <li> elements and append <img> and <p> elements
 // with their corresponding src attributes and text onto them.
 function createImageItems(flavorObjects, flavorType) {
-    console.log("Creating image items.");
 
     // if we're on the home page, just get the imgs for the marquee
     if (window.location.pathname.includes("/flavors")) {
-        console.log("On flavors page.");
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
                 allFlavorsList.appendChild(getListItem(i, flavorObjects));
@@ -152,7 +147,6 @@ function createImageItems(flavorObjects, flavorType) {
 
 // Adds flavor <li> element to its corresponding <ul> and is displayed.
 function getListItem(i, flavorObjects) {
-        console.log("Creating list items.");
 
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
@@ -175,11 +169,9 @@ function getListItem(i, flavorObjects) {
 // Only fetch + load images on Flavors page
 window.onload = function() {
     if (window.location.pathname.includes("/flavors")) {
-        console.log("On flavors page, initializing.");
         getImageURLs();
     }
 };
-
 
 
 // Toggle which lists is being displayed: All Flavors, Seasonal, Vegan
@@ -202,5 +194,9 @@ function toggleLists(event) {
         btns[i].classList.toggle('button-active', btns[i].id === id);
     }
 }
+
+
+
+
 
 
