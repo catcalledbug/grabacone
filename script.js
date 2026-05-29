@@ -10,14 +10,13 @@ let seasonalFlavors = [];
 
 // categorized <ul> elements that will hold the displayed images/text
 let allFlavorsList = document.querySelector('.image-list.all');
-let seasonalFlavorsList = document.querySelector('.image-list.seasonal');
-let veganFlavorsList = document.querySelector('.image-list.vegan');
+// let seasonalFlavorsList = document.querySelector('.image-list.seasonal');
+// let veganFlavorsList = document.querySelector('.image-list.vegan');
 
 // initial collection of unformatted data
 let flavorObjects = [];
 
-// loading animation
-const loading = document.querySelector(".loader");
+
 
 function Img(urlForm, displayForm, flavType) {
     this.urlForm = `${s3URL}${urlForm}`;
@@ -28,6 +27,11 @@ function Img(urlForm, displayForm, flavType) {
 // fetch images from s3 bucket, send xml to be converted,
 // then add event listeners to buttons
 async function getImageURLs() {
+
+    // loading animation
+    let loading = document.querySelector(".loader");
+
+
     const request = new Request(s3URL);
     fetch(request)
         .then((response) => {
@@ -39,9 +43,11 @@ async function getImageURLs() {
             }
         })
         .then((xmlString) => {
+            loading.classList.add("hide");
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, "text/xml");
             createList(xmlDoc);
+            
         })
         .then(() => {
             const flavorBtns = document.querySelectorAll(".flavor-button");
@@ -129,50 +135,51 @@ function sortFlavors(flavorObjects) {
 // Create <li> elements and append <img> and <p> elements
 // with their corresponding src attributes and text onto them.
 function createImageItems(flavorObjects, flavorType) {
-    console.log("Iterating through image objects.", flavorObjects);
-    // if we're on the home page, just get the imgs for the marquee
-    if (window.location.pathname.includes("flavors")) {
+    // console.log("createImageItems: ", flavorType);
+
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
-                allFlavorsList.appendChild(getListItem(i, flavorObjects));
+                // allFlavorsList.append(getListItem(i, flavorObjects));
+                document.getElementById("all-list").append(getListItem(i, flavorObjects));
             } else if (flavorType == 'seasonal') {
-                seasonalFlavorsList.appendChild(getListItem(i, flavorObjects));
+                document.getElementById("seasonal-list").append(getListItem(i, flavorObjects));
             } else if (flavorType == 'vegan') {
-                veganFlavorsList.appendChild(getListItem(i, flavorObjects));
+                document.getElementById("vegan-list").append(getListItem(i, flavorObjects));
             }
         }
-    }
 }
 
 // Adds flavor <li> element to its corresponding <ul> and is displayed.
 function getListItem(i, flavorObjects) {
-        console.log("Creating image elements.");
         let listItem = document.createElement("li");
         listItem.classList.add('flavor-item');
-        loading.classList.add("hide");
 
         let imgElement = document.createElement("img");
+
         imgElement.setAttribute('src', flavorObjects[i].urlForm);
         imgElement.setAttribute('loading', 'lazy');
-        imgElement.setAttribute('class', 'flavor-img');
+        imgElement.classList.add('flavor-img');
+        // imgElement.setAttribute('class', 'flavor-img');
         imgElement.setAttribute('alt', `A scoop of ${flavorObjects[i].displayForm} icecream.`);
 
         let flavorCaption = document.createElement("p");
         flavorCaption.textContent = flavorObjects[i].displayForm;
 
-        listItem.appendChild(imgElement);
-        listItem.appendChild(flavorCaption);
+        listItem.append(imgElement);
+        listItem.append(flavorCaption);
         
-        console.log("listItem: ", listItem);
-
         return listItem;
-}   
+};   
 
 // Only fetch + load images on Flavors page
-window.onload = function() {
+window.onload = (event) => {
     if (window.location.pathname.includes("flavors")) {
-        getImageURLs();
-    }
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", getImageURLs);
+        } else if (document.readyState === "complete") {
+            getImageURLs();
+        }
+    };
 };
 
 
@@ -189,13 +196,13 @@ function toggleLists(event) {
     // All, Vegan, Seasonal Lists of fbuttonsflavor images
     for (let i = 0; i < lists.length; i++) {
         lists[i].classList.toggle('active', (lists[i].id).slice(0, lists[i].id.indexOf("-")) === id);
-    }
+    };
 
     // All, Vegan, Seasonal buttons
     for (let i = 0; i < btns.length; i++) {
         btns[i].classList.toggle('button-active', btns[i].id === id);
-    }
-}
+    };
+};
 
 
 
