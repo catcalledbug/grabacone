@@ -3,21 +3,15 @@
 const s3URL = "https://updated-flavors-gac.s3.us-west-2.amazonaws.com/";
  
 // arrays of objects that will hold 
-// Img object {urlForm: "image src url", displayForm: "display name"} pairs]
+// Img object {urlForm: "image src url", displayForm: "display name", flavType: "seasonal or veg"} pairs]
 let allFlavors = [];
 let veganFlavors = [];
 let seasonalFlavors = [];
 
-// categorized <ul> elements that will hold the displayed images/text
-let allFlavorsList = document.querySelector('.image-list.all');
-// let seasonalFlavorsList = document.querySelector('.image-list.seasonal');
-// let veganFlavorsList = document.querySelector('.image-list.vegan');
-
 // initial collection of unformatted data
 let flavorObjects = [];
 
-
-
+// constructor function for formatted flavor data
 function Img(urlForm, displayForm, flavType) {
     this.urlForm = `${s3URL}${urlForm}`;
     this.displayForm = displayForm;
@@ -30,7 +24,6 @@ async function getImageURLs() {
 
     // loading animation
     let loading = document.querySelector(".loader");
-
 
     const request = new Request(s3URL);
     fetch(request)
@@ -56,9 +49,13 @@ async function getImageURLs() {
                     toggleLists(event);
                 });
             }
+        }).catch((error) => {
+            console.error("Error fetching the data: ", error);
+            // add message for user to "try again later" and stop loading animation if the fetch fails
+            loading.classList.add("hide");
+            document.getElementById("all-list").innerHTML = "<p id='error-msg'>Sorry! Failed to load our flavors. Please refresh the page or try again later.</p>";
         });
 }
-
 
 // convert xml elements -> array 
 function createList(xml) {
@@ -66,7 +63,6 @@ function createList(xml) {
     const imgObjs = Array.from(elements);
     createListOfFlavors(imgObjs);
 }
-
 
 // get the image key and add to img object before further formatting
 function createListOfFlavors(imgObjs) {
@@ -82,7 +78,6 @@ function createListOfFlavors(imgObjs) {
     }
     parseFlavorNames(flavors);
 }
-
 
 // formatting for display, the data doesn't follow a super consistent format, some
 // use underscores and some have multiple dashes that can be used as delimiters
@@ -111,7 +106,6 @@ function parseFlavorNames(flavorsBefore) {
     sortFlavors(flavorObjects);
 }
 
-
 // sorts flavors into categories: All, Seasonal, and Vegan
 function sortFlavors(flavorObjects) {
     const veganIdentifiers = ["Soy", "Sherbet", "Ice"];
@@ -131,15 +125,12 @@ function sortFlavors(flavorObjects) {
     createImageItems(veganFlavors, 'vegan');
 }
 
-
 // Create <li> elements and append <img> and <p> elements
 // with their corresponding src attributes and text onto them.
 function createImageItems(flavorObjects, flavorType) {
-    // console.log("createImageItems: ", flavorType);
 
         for (let i = 0; i < flavorObjects.length; i++) {
             if (flavorType == 'all') {
-                // allFlavorsList.append(getListItem(i, flavorObjects));
                 document.getElementById("all-list").append(getListItem(i, flavorObjects));
             } else if (flavorType == 'seasonal') {
                 document.getElementById("seasonal-list").append(getListItem(i, flavorObjects));
@@ -159,7 +150,6 @@ function getListItem(i, flavorObjects) {
         imgElement.setAttribute('src', flavorObjects[i].urlForm);
         imgElement.setAttribute('loading', 'lazy');
         imgElement.classList.add('flavor-img');
-        // imgElement.setAttribute('class', 'flavor-img');
         imgElement.setAttribute('alt', `A scoop of ${flavorObjects[i].displayForm} icecream.`);
 
         let flavorCaption = document.createElement("p");
@@ -193,7 +183,7 @@ function toggleLists(event) {
     const lists = document.querySelectorAll(".image-list");
     const btns = document.querySelectorAll(".flavor-button");
 
-    // All, Vegan, Seasonal Lists of fbuttonsflavor images
+    // All, Vegan, Seasonal Lists of flavor images
     for (let i = 0; i < lists.length; i++) {
         lists[i].classList.toggle('active', (lists[i].id).slice(0, lists[i].id.indexOf("-")) === id);
     };

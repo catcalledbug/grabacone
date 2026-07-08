@@ -44,6 +44,12 @@ body {
     padding: 10px;
 }
 
+#error-msg {
+    width: 95vw;
+    color: red;
+    font-size: 1.5rem;
+}
+
 .lg-header {
     display: none;
 }
@@ -385,8 +391,6 @@ a:hover, a:visited, a:link, a:active, a {
     }
 }
   
-
-
 /* Loading animation while flavor imgs load in */
 .loader {
     width: 40px;
@@ -417,7 +421,9 @@ a:hover, a:visited, a:link, a:active, a {
 }
 
 @keyframes l23 {
-    100% {transform: rotate(1turn)}
+    100% {
+        transform: rotate(1turn);
+    }
 }
 
 .hide {
@@ -430,9 +436,6 @@ a:hover, a:visited, a:link, a:active, a {
 }
 
 
-
-
-/* First breakpoint 900 */
 @media (min-width: 1050px) {
     body {
         margin-top: 100px;
@@ -592,9 +595,6 @@ a:hover, a:visited, a:link, a:active, a {
         grid-area: sect3;
     } 
 
-    /* .marquee {
-        grid-area: marquee;
-    } */
 
     #nav-list > .list-item > a:hover::after,
     #nav-list > .list-item > a:active::after {
@@ -663,45 +663,5 @@ a:hover, a:visited, a:link, a:active, a {
     iframe {
         border: 2px solid var(--deco) !important; 
     }
-
 }    
-
-
-/* @media (min-width: 1410px) {
-    .marquee {
-        overflow: hidden;
-        user-select: none;
-        display: flex;
-        height: 100px;
-        margin-top: 100px;
-    }
-    
-    .marquee-imgs {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        animation: scroll 30s linear infinite;
-    }
-    
-    .marquee-group {
-        display: flex;
-        flex-shrink: 0;
-        gap: 18px;
-        width: 100%;
-    }
-    
-    .marquee-img {
-        height: 100px;
-
-    }
-    
-    .marquee-imgs :nth-child(1) > img:last-of-type {
-
-    
-    }
-    
-    .marquee-img:hover {
-        transform: scale(1.2);
-    }
-} */
 
