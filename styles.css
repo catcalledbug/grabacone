@@ -155,6 +155,7 @@ ul.image-list.active {
     font-size: 1rem;
     font-family: var(--body-font);
     font-weight: 400;
+    cursor: pointer;
 }
 
 .button-wrapper {
