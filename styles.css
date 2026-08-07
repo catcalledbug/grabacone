@@ -92,6 +92,17 @@ img {
 }
 
 h1 {
+    /* font-family: var(--heading-font);
+    text-align: center;
+    font-weight: 400;
+    color: var(--secondary);
+    margin: 0 auto;
+    font-size: var(--heading-size);
+    letter-spacing: 1px;
+    line-height: 1.1; */
+}
+
+.large-text {
     font-family: var(--heading-font);
     text-align: center;
     font-weight: 400;
@@ -100,6 +111,15 @@ h1 {
     font-size: var(--heading-size);
     letter-spacing: 1px;
     line-height: 1.1;
+}
+
+.extended-h1 {
+    font-size: 1.6rem;
+    color: black;
+    font-family: 'Manrope';
+    font-weight: 600;
+    letter-spacing: 0;
+    font-style: italic;
 }
 
 h2 {
@@ -493,8 +513,9 @@ a:hover, a:visited, a:link, a:active, a {
         padding: 0;
     }
 
-    h1 {
-        font-size: 3rem;
+    .large-text {
+        font-size: 4rem;
+        line-height: .75;
     }
 
     header {
