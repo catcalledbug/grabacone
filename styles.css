@@ -518,6 +518,10 @@ a:hover, a:visited, a:link, a:active, a {
         line-height: .75;
     }
 
+    .different-height {
+        line-height: 1;
+    }
+
     header {
         width: 100vw;
         position: fixed;
